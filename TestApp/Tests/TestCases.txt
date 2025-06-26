@@ -1,0 +1,85 @@
+Test Case 1: Create a Study Group with valid data
+Steps:
+    1. Call the API to create a StudyGroup with name “Math Group”, subject “Math”, current date, and no users.
+Expected: 
+    1. Response should be 200 Ok
+    2. Group should be saved
+Tags:
+Regression, Automated, Testing level: Component
+
+Test Case 2: Prevent Duplicate StudyGroup for Same Subject
+Create Chemistry group, try to create another Chemistry group
+Steps: 
+    1. Two group creations with subject Chemistry
+Expected:
+    1. Response should be 409 Conflict
+Tags:
+Regression, Automated, Testing level: Component
+
+Test Case 3: Validate StudyGroup Name Length
+Try to create groups with invalid name lengths (e.g., "A", "NameTooLongForValidation...")
+Steps: 
+    1. Fill name too short or too long
+Expected:
+    1. Response should be 400 BadRequest
+Tags:
+Regression, Automated, Testing level: Unit
+
+Test Case 4: User Joins StudyGroup
+Steps: 
+    1. Call API to join user to Physics group with studyGroupId, userId
+Expected:
+    1. Response should be 200 Ok
+Tags:
+Regression, Automated, Testing level: Component
+
+Test Case 5: User Leaves StudyGroup
+Steps: 
+    1. Call API to remove user from group with studyGroupId, userId
+Expected:
+    1. Response should be 200 Ok
+    2. User should be removed
+Tags:
+Regression, Automated, Testing level: Component
+
+Test Case 6: Retrieve All StudyGroups
+Steps: 
+    1. Retrieve GET studyGroups
+Expected:
+    1. Response should be 200 Ok
+    2. Response should contain studyGroups list 
+Tags:
+Regression, Automated, Testing level: Component
+
+Test Case 7: Filter StudyGroups by Subject
+Steps: 
+    1. Retrieve GET /studyGroups?subject=Physics
+Expected:
+    1. Response should be 200 Ok
+    2. Response should contain only one group Physics
+Tags:
+Regression, Automated, Testing level: Component
+
+Test Case 8: Sort StudyGroups by Creation Date
+Steps: 
+    1. Manually check sort UI
+Expected:
+    1. List updates correctly
+Tags:
+Regression, Manual, Testing level: E2E
+
+Test Case 9: Prevent Joining Group Twice
+Steps: 
+    1. User joins a group, then attempts to join again
+Expected:
+    1. No duplicate entries
+Tags:
+Regression, Automated, Testing level: Unit
+
+Test Case 10: Invalid Subject Rejected
+Steps: 
+    1. Try to create StudyGroup with an invalid subject like History
+Expected:
+    1. Response should be with error Bad Request
+Tags:
+Regression, Automated, Testing level: Unit
